@@ -7,8 +7,8 @@ import catalogRouter from '../controllers/catalog';
 const router = require('koa-router')()
 
 router
-    .get('/index/index', shopRouter.indexAction)
-    .post('/catalog/index', catalogRouter.indexAction)
-    .post('/catalog/current', catalogRouter.currentAction)
+    .get('/api/index/index', shopRouter.indexAction)
+    .post('/api/catalog/index', catalogRouter.indexAction)
+    .post('/api/catalog/current', catalogRouter.currentAction)
 
 module.exports = router
