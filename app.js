@@ -53,12 +53,16 @@ app.use(async (ctx, next) => {
 })
 
 // routes
+app.use(require('./rest/middlewares/response'));
+app.use(require('./rest/middlewares/filter'));
 app.use(shopRouter.routes(), shopRouter.allowedMethods())
 
 
-// error-handling
-app.on('error', (err, ctx) => {
-    console.error('server error', err, ctx)
+// response
+app.on('error', function(err, ctx){
+    console.log(err)
+    logger.error('server error', err, ctx);
+    ctx.render('error', { message: ' 服务器错误!',error: err });
 });
 
 module.exports = app
