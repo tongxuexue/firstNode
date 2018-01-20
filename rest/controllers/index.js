@@ -63,24 +63,17 @@ class indexController {
             });
         }
 
-        return ctx.body = {
-            banner: banner,
-            channel: channel,
-            newGoodsList: newGoods,
-            hotGoodsList: hotGoods,
-            brandList: brandList,
-            topicList: topicList,
-            categoryList: newCategoryList
-        };
-        // return this.success({
-        //     banner: banner,
-        //     channel: channel,
-        //     newGoodsList: newGoods,
-        //     hotGoodsList: hotGoods,
-        //     brandList: brandList,
-        //     topicList: topicList,
-        //     categoryList: newCategoryList
-        // });
+        return ctx.success({
+            data: {
+                banner: banner,
+                channel: channel,
+                newGoodsList: newGoods,
+                hotGoodsList: hotGoods,
+                brandList: brandList,
+                topicList: topicList,
+                categoryList: newCategoryList
+            }
+        });
     }
 }
 
