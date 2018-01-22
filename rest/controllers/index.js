@@ -7,7 +7,7 @@ class indexController {
             sql: 'select * from nideshop_ad where ad_position_id = 1',
         });
 
-        console.log(banner)
+        console.log(ctx)
 
         const channel = await mysql.execQuery({
             sql: 'select * from nideshop_channel order by sort_order asc',
@@ -30,7 +30,7 @@ class indexController {
         });
 
         const categoryList = await mysql.execQuery({
-            sql: `select * from nideshop_category where parent_id = 0 and name = "推荐" limit 3`,
+            sql: 'select * from nideshop_category where parent_id = 0',
 
         });
 
@@ -43,25 +43,25 @@ class indexController {
         //const categoryList = await this.model('category').where({parent_id: 0, name: ['<>', '推荐']}).select();
         const newCategoryList = [];
 
-        for (const categoryItem of categoryList) {
-
-            const childCategoryIds = await mysql.execQuery({
-                sql: 'select id from nideshop_category where parent_id = ? and id = 100',
-                args: [categoryItem.id]
-            });
-
-            const categoryGoods = await mysql.execQuery({
-                sql: 'select id,name,list_pic_url,retail_price from nideshop_goods where category_id = ? limit 7',
-                args: [['IN', childCategoryIds]]
-            });
-            //const childCategoryIds = await this.model('category').where({parent_id: categoryItem.id}).getField('id', 100);
-            //const categoryGoods = await this.model('goods').field(['id', 'name', 'list_pic_url', 'retail_price']).where({category_id: ['IN', childCategoryIds]}).limit(7).select();
-            newCategoryList.push({
-                id: categoryItem.id,
-                name: categoryItem.name,
-                goodsList: categoryGoods
-            });
-        }
+        // for (const categoryItem of categoryList) {
+        //
+        //     const childCategoryIds = await mysql.execQuery({
+        //         sql: 'select id from nideshop_category where parent_id = ? and id = 100',
+        //         args: [categoryItem.id]
+        //     });
+        //
+        //     const categoryGoods = await mysql.execQuery({
+        //         sql: 'select id,name,list_pic_url,retail_price from nideshop_goods where category_id = ? limit 7',
+        //         args: [childCategoryIds]
+        //     });
+        //     //const childCategoryIds = await this.model('category').where({parent_id: categoryItem.id}).getField('id', 100);
+        //     //const categoryGoods = await this.model('goods').field(['id', 'name', 'list_pic_url', 'retail_price']).where({category_id: ['IN', childCategoryIds]}).limit(7).select();
+        //     newCategoryList.push({
+        //         id: categoryItem.id,
+        //         name: categoryItem.name,
+        //         goodsList: categoryGoods
+        //     });
+        // }
 
         return ctx.success({
             data: {
@@ -77,4 +77,5 @@ class indexController {
     }
 }
 
-export default indexController;
+module.exports = indexController;
+//export default indexController;

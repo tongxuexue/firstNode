@@ -10,6 +10,8 @@ class catalogController {
      */
     static async indexAction(ctx) {
         //let { id } = ctx.query;
+
+        console.log(ctx)
         const categoryId = ctx.params.id;
 
         // const model = await mysql.execQuery({
@@ -80,4 +82,7 @@ class catalogController {
 
 }
 
-export default catalogController;
+module.exports = catalogController;
+// or
+// exports.SomeController = SomeController;
+// export default catalogController;
