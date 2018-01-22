@@ -8,7 +8,7 @@ const router = require('koa-router')()
 
 router
     .get('/api/index/index', shopRouter.indexAction)
-    .post('/api/catalog/index', catalogRouter.indexAction)
+    .get('/api/catalog/index', catalogRouter.indexAction)
     .post('/api/catalog/current', catalogRouter.currentAction)
 
 module.exports = router

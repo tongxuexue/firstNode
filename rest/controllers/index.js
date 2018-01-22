@@ -7,8 +7,6 @@ class indexController {
             sql: 'select * from nideshop_ad where ad_position_id = 1',
         });
 
-        console.log(ctx)
-
         const channel = await mysql.execQuery({
             sql: 'select * from nideshop_channel order by sort_order asc',
         });

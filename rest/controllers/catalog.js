@@ -11,8 +11,18 @@ class catalogController {
     static async indexAction(ctx) {
         //let { id } = ctx.query;
 
-        console.log(ctx)
-        const categoryId = ctx.params.id;
+        // return ctx.success({
+        //     data: {
+        //         test1: ctx,
+        //         test2: ctx.query,
+        //         test3: ctx.params,
+        //         test4: ctx.query.id
+        //     }
+        //
+        // });
+        //
+        // console.log(ctx)
+        const categoryId = ctx.query.id;
 
         // const model = await mysql.execQuery({
         //     sql: 'select * from nideshop_category where parent_id = 0',
@@ -48,14 +58,17 @@ class catalogController {
             //currentCategory.subCategoryList = await model.where({'parent_id': currentCategory.id}).select();
         }
 
-        return this.success({
-            categoryList: data,
-            currentCategory: currentCategory
+        return ctx.success({
+            data: {
+                categoryList: data,
+                currentCategory: currentCategory
+            }
         });
+
     }
 
     static async  currentAction(ctx) {
-        const categoryId = ctx.params.id;
+        const categoryId = ctx.query.id;
         //const model = this.model('category');
 
         let currentCategory = null;
@@ -75,9 +88,13 @@ class catalogController {
             //currentCategory.subCategoryList = await model.where({'parent_id': currentCategory.id}).select();
         }
 
-        return this.success({
-            currentCategory: currentCategory
+
+        return ctx.success({
+            data: {
+                currentCategory: currentCategory
+            }
         });
+
     }
 
 }
