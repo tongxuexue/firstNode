@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e4da3736-14a3-4dae-a70b-2ef6dc385541" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rest/controllers/catalog.js" afterPath="$PROJECT_DIR$/rest/controllers/catalog.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rest/controllers/index.js" afterPath="$PROJECT_DIR$/rest/controllers/index.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rest/routes/shoprouter.js" afterPath="$PROJECT_DIR$/rest/routes/shoprouter.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -22,10 +21,11 @@
       <file leaf-file-name="shoprouter.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/rest/routes/shoprouter.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="88">
-              <caret line="4" column="30" lean-forward="false" selection-start-line="4" selection-start-column="30" selection-end-line="4" selection-end-column="30" />
+            <state relative-caret-position="242">
+              <caret line="11" column="8" lean-forward="false" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="8" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
+                <element signature="e#40#86#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -100,8 +100,8 @@
       <file leaf-file-name="catalog.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/rest/controllers/catalog.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="16">
-              <caret line="76" column="66" lean-forward="false" selection-start-line="76" selection-start-column="66" selection-end-line="76" selection-end-column="66" />
+            <state relative-caret-position="534">
+              <caret line="85" column="8" lean-forward="false" selection-start-line="85" selection-start-column="8" selection-end-line="85" selection-end-column="8" />
               <folding>
                 <element signature="e#0#38#0" expanded="false" />
               </folding>
@@ -149,8 +149,8 @@
         <option value="$PROJECT_DIR$/package.json" />
         <option value="module.js" />
         <option value="bootstrap_node.js" />
-        <option value="$PROJECT_DIR$/rest/routes/shoprouter.js" />
         <option value="$PROJECT_DIR$/rest/controllers/index.js" />
+        <option value="$PROJECT_DIR$/rest/routes/shoprouter.js" />
         <option value="$PROJECT_DIR$/rest/controllers/catalog.js" />
       </list>
     </option>
@@ -173,8 +173,8 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="63" />
-    <option name="y" value="449" />
+    <option name="x" value="935" />
+    <option name="y" value="160" />
     <option name="width" value="1870" />
     <option name="height" value="1057" />
   </component>
@@ -404,12 +404,12 @@
       <workItem from="1516245334205" duration="10303000" />
       <workItem from="1516328013838" duration="6305000" />
       <workItem from="1516518476250" duration="2863000" />
-      <workItem from="1516587825509" duration="6315000" />
+      <workItem from="1516587825509" duration="8591000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26241000" />
+    <option name="totallyTimeSpent" value="28517000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -421,7 +421,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="63" y="449" width="1870" height="1057" extended-state="0" />
+    <frame x="935" y="160" width="1870" height="1057" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16873986" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -488,6 +488,7 @@
           <caret line="5" column="14" lean-forward="true" selection-start-line="5" selection-start-column="14" selection-end-line="5" selection-end-column="14" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
+            <element signature="e#40#86#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -574,6 +575,7 @@
           <caret line="9" column="8" lean-forward="false" selection-start-line="9" selection-start-column="8" selection-end-line="9" selection-end-column="8" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
+            <element signature="e#40#86#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -659,6 +661,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
+            <element signature="e#40#86#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -816,13 +819,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/rest/routes/shoprouter.js">
+    <entry file="file://$PROJECT_DIR$/rest/controllers/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="4" column="30" lean-forward="false" selection-start-line="4" selection-start-column="30" selection-end-line="4" selection-end-column="30" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
+        <state relative-caret-position="457">
+          <caret line="70" column="37" lean-forward="true" selection-start-line="70" selection-start-column="37" selection-end-line="70" selection-end-column="37" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -836,18 +837,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/rest/controllers/index.js">
+    <entry file="file://$PROJECT_DIR$/rest/routes/shoprouter.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="457">
-          <caret line="70" column="37" lean-forward="true" selection-start-line="70" selection-start-column="37" selection-end-line="70" selection-end-column="37" />
-          <folding />
+        <state relative-caret-position="242">
+          <caret line="11" column="8" lean-forward="false" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="8" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#40#86#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/rest/controllers/catalog.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16">
-          <caret line="76" column="66" lean-forward="false" selection-start-line="76" selection-start-column="66" selection-end-line="76" selection-end-column="66" />
+        <state relative-caret-position="534">
+          <caret line="85" column="8" lean-forward="false" selection-start-line="85" selection-start-column="8" selection-end-line="85" selection-end-column="8" />
           <folding>
             <element signature="e#0#38#0" expanded="false" />
           </folding>

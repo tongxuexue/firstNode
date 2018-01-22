@@ -11,17 +11,6 @@ class catalogController {
     static async indexAction(ctx) {
         //let { id } = ctx.query;
 
-        // return ctx.success({
-        //     data: {
-        //         test1: ctx,
-        //         test2: ctx.query,
-        //         test3: ctx.params,
-        //         test4: ctx.query.id
-        //     }
-        //
-        // });
-        //
-        // console.log(ctx)
         const categoryId = ctx.query.id;
 
         // const model = await mysql.execQuery({
@@ -72,23 +61,29 @@ class catalogController {
         //const model = this.model('category');
 
         let currentCategory = null;
+        let data = null;
         if (categoryId) {
-            currentCategory = await mysql.execQuery({
+            data = await mysql.execQuery({
                 sql: 'select * from nideshop_category where id = ?',
-                args: [categoryId]
+                args: categoryId
             });
             //currentCategory = await model.where({'id': categoryId}).find();
         }
-        // 获取子分类数据
-        if (currentCategory && currentCategory.id) {
-            currentCategory.subCategoryList =  await mysql.execQuery({
-                sql: 'select * from nideshop_category where parent_id = ?',
-                args: [currentCategory.id]
-            });
-            //currentCategory.subCategoryList = await model.where({'parent_id': currentCategory.id}).select();
+
+        if (data) {
+            currentCategory = data[0];
         }
 
+        // 获取子分类数据
+        if (currentCategory&&currentCategory.id) {
+            currentCategory.subCategoryList =  await mysql.execQuery({
+                sql: 'select * from nideshop_category where parent_id = ?',
+                args: currentCategory.id
+            });
 
+            //currentCategory.subCategoryList = await model.where({'parent_id': currentCategory.id}).select();
+        }
+        
         return ctx.success({
             data: {
                 currentCategory: currentCategory
