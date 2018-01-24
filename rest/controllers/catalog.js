@@ -83,7 +83,7 @@ class catalogController {
 
             //currentCategory.subCategoryList = await model.where({'parent_id': currentCategory.id}).select();
         }
-        
+
         return ctx.success({
             data: {
                 currentCategory: currentCategory
