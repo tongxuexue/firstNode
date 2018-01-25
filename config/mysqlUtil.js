@@ -53,7 +53,6 @@ var execQuery = sqlOptions => {
                         console.log('Execute query error !');
                         throw error;
                     }
-
                     resolve(results);
                 });
             }

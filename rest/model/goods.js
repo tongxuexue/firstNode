@@ -19,15 +19,19 @@ class goodsModel {
      */
     static async getSpecificationList(goodsId) {
         // 根据sku商品信息，查找规格值列表
-        const specificationRes = await this.model('goods_specification').alias('gs')
-            .field(['gs.*', 's.name'])
-            .join({
-                table: 'specification',
-                join: 'inner',
-                as: 's',
-                on: ['specification_id', 'id']
-            })
-            .where({goods_id: goodsId}).select();
+        const specificationRes = await mysql.execQuery({
+            sql: 'select gs.*, s.name from nideshop_goods_specification as gs inner join nideshop_specification as s on gs.specification_id = s.id  where  goods_id = ? ',
+            args: goodsId
+        });
+        // const specificationRes = await this.model('goods_specification').alias('gs')
+        //     .field(['gs.*', 's.name'])
+        //     .join({
+        //         table: 'specification',
+        //         join: 'inner',
+        //         as: 's',
+        //         on: ['specification_id', 'id']
+        //     })
+        //     .where({goods_id: goodsId}).select();
 
         const specificationList = [];
         const hasSpecificationList = {};

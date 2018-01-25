@@ -35,22 +35,22 @@ class goodsController {
      */
     static async detailAction(ctx) {
         const goodsId = ctx.query.id;
-        const model = this.model('goods');
 
         const info = await mysql.execQuery({
-            sql: 'select * from nideshop_goods where id = ?',
-            args: goodsId
+            sql: 'select * from nideshop_goods where id = 111111 limit 1',
         });
+
+        const brand_id = typeof(info[0])=="undefined" ? '':info[0];
+
         const gallery = await mysql.execQuery({
             sql: 'select * from nideshop_goods_gallery where goods_id = ? limit 4',
             args: goodsId
         });
 
         const attribute = await mysql.execQuery({
-            sql: 'select * from nideshop_goods_attribute where goods_id = ? limit 4',
+            sql: 'select nideshop_goods_attribute.value,nideshop_attribute.name from nideshop_goods_attribute left join nideshop_attribute on nideshop_goods_attribute.attribute_id = nideshop_attribute.id where nideshop_goods_attribute.goods_id = ? order by nideshop_goods_attribute.id asc',
             args: goodsId
         });
-        const attribute = await this.model('goods_attribute').field('nideshop_goods_attribute.value, nideshop_attribute.name').join('nideshop_attribute ON nideshop_goods_attribute.attribute_id=nideshop_attribute.id').order({'nideshop_goods_attribute.id': 'asc'}).where({'nideshop_goods_attribute.goods_id': goodsId}).select();
 
 
         const issue = await mysql.execQuery({
@@ -59,32 +59,49 @@ class goodsController {
 
         const brand = await mysql.execQuery({
             sql: 'select * from nideshop_brand where id = ?',
-            args: info.brand_id
+            args: brand_id
         });
 
         const commentCount = await mysql.execQuery({
-            sql: 'select count(*) from nideshop_comment where value_id = ? and type_id = 0',
-            args: info.brand_id
+            sql: 'select count(*) from nideshop_comment where value_id = ? and type_id = 0 limit 1',
+            args: brand_id
         });
 
         const hotComment = await mysql.execQuery({
-            sql: 'select count(*) from nideshop_comment where value_id = ? and type_id = 0',
+            sql: 'select * from nideshop_comment where value_id = ? and type_id = 0 limit 1',
             args: goodsId
         });
+
+
+        return ctx.success({
+            data: {
+                info: info,
+                gallery: gallery,
+                attribute: attribute,
+                issue: issue,
+                brand: brand,
+                specificationList: goodsModel.getSpecificationList(goodsId),
+                productList: goodsModel.getProductList(goodsId)
+            }
+        });
+
+
+        const hotComment_user_id = typeof(hotComment[0])=="undefined" ? '':info[0].user_id;
+        const hotComment_id = typeof(hotComment[0])=="undefined" ? '':info[0].id;
 
         let commentInfo = {};
         if (!(JSON.stringify(hotComment) == "{}")) {
 
             const commentUser = await mysql.execQuery({
-                sql: 'select nickname,username,avatar from nideshop_user where id = ?',
-                args: hotComment.user_id
+                sql: 'select nickname,username,avatar from nideshop_user where id = ? limit 1',
+                args: hotComment_user_id
             });
 
             const pic_list = await mysql.execQuery({
-                sql: 'select nickname,username,avatar from nideshop_comment_picture where comment_id = ? ',
-                args: hotComment.id
+                sql: 'select * from nideshop_comment_picture where comment_id = ? ',
+                args: hotComment_id
             });
-            //const commentUser = await this.model('user').field(['nickname', 'username', 'avatar']).where({id: hotComment.user_id}).find();
+
             commentInfo = {
                 content: new Buffer(hotComment.content, 'base64').toString(),
                 add_time: new Date(hotComment.add_time * 1000),
@@ -100,23 +117,25 @@ class goodsController {
         };
 
         // 当前用户是否收藏
-        const userHasCollect = goodsController.isUserHasCollect(think.userId, 0, goodsId);
+        const userHasCollect = goodsController.isUserHasCollect(think.user_id, 0, goodsId);
         //const userHasCollect = await this.model('collect').isUserHasCollect(think.userId, 0, goodsId);
 
         // 记录用户的足迹 TODO
-        await await this.model('footprint').addFootprint(think.userId, goodsId);
+        goodsController.addFootprint(think.user_id, goodsId)
+        //await this.model('footprint').addFootprint('test', goodsId);
 
-        // return this.json(jsonData);
-        return this.success({
-            info: info,
-            gallery: gallery,
-            attribute: attribute,
-            userHasCollect: userHasCollect,
-            issue: issue,
-            comment: comment,
-            brand: brand,
-            specificationList: await model.getSpecificationList(goodsId),
-            productList: await model.getProductList(goodsId)
+        return ctx.success({
+            data: {
+                info: info,
+                gallery: gallery,
+                attribute: attribute,
+                userHasCollect: userHasCollect,
+                issue: issue,
+                comment: comment,
+                brand: brand,
+                specificationList: goodsModel.getSpecificationList(goodsId),
+                productList: goodsModel.getProductList(goodsId)
+            }
         });
     }
 
@@ -125,8 +144,17 @@ class goodsController {
             sql: 'select count(id) from nideshop_collect where value_id = ? and type_id = ? and user_id = ? limit 1',
             args: [valueId, typeId, userId]
         });
-        //const hasCollect = await this.where({type_id: typeId, value_id: valueId, user_id: userId}).limit(1).count('id');
         return hasCollect;
+    }
+
+    static async addFootprint(userId, goodsId) {
+        // 用户已经登录才可以添加到足迹
+        if (userId > 0 && goodsId > 0) {
+            await mysql.execQuery({
+                sql: 'INSERT INTO nideshop_footprint (user_id, goods_id, add_time) VALUES (?,?,?)',
+                args: [userId, goodsId, parseInt(Date.now() / 1000)]
+            });
+        }
     }
 
     /**
