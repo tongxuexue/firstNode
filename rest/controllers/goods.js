@@ -37,10 +37,11 @@ class goodsController {
         const goodsId = ctx.query.id;
 
         const info = await mysql.execQuery({
-            sql: 'select * from nideshop_goods where id = 111111 limit 1',
+            sql: 'select * from nideshop_goods where id = ? limit 1',
+            args: goodsId
         });
 
-        const brand_id = typeof(info[0])=="undefined" ? '':info[0];
+        const brand_id = !info[0] ? '' : info[0].brand_id;
 
         const gallery = await mysql.execQuery({
             sql: 'select * from nideshop_goods_gallery where goods_id = ? limit 4',
@@ -52,14 +53,37 @@ class goodsController {
             args: goodsId
         });
 
-
         const issue = await mysql.execQuery({
             sql: 'select * from nideshop_goods_issue',
         });
 
+        if (!brand_id) {
+
+            return ctx.success({
+                data: {
+                    brand_id: '大萨达所',
+                    test: typeof(brand_id)
+                }
+            });
+
+        } else {
+
+            return ctx.success({
+                data: {
+                    brand_id: brand_id
+                }
+            });
+        }
+
         const brand = await mysql.execQuery({
-            sql: 'select * from nideshop_brand where id = ?',
+            sql: 'select * from nideshop_brand where id = 0',
             args: brand_id
+        });
+
+        return ctx.success({
+            data: {
+                brand_id: brand_id
+            }
         });
 
         const commentCount = await mysql.execQuery({
@@ -75,19 +99,13 @@ class goodsController {
 
         return ctx.success({
             data: {
-                info: info,
-                gallery: gallery,
-                attribute: attribute,
-                issue: issue,
-                brand: brand,
-                specificationList: goodsModel.getSpecificationList(goodsId),
-                productList: goodsModel.getProductList(goodsId)
+                hotComment: hotComment
             }
         });
 
 
-        const hotComment_user_id = typeof(hotComment[0])=="undefined" ? '':info[0].user_id;
-        const hotComment_id = typeof(hotComment[0])=="undefined" ? '':info[0].id;
+        const hotComment_user_id = typeof(hotComment[0]) == "undefined" ? '' : info[0].user_id;
+        const hotComment_id = typeof(hotComment[0]) == "undefined" ? '' : info[0].id;
 
         let commentInfo = {};
         if (!(JSON.stringify(hotComment) == "{}")) {
