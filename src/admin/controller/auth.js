@@ -2,6 +2,9 @@ const Base = require('./base.js');
 
 module.exports = class extends Base {
   async loginAction() {
+
+    return this.success({  userInfo: 'ceshiceshi' });
+
     const username = this.post('username');
     const password = this.post('password');
 
