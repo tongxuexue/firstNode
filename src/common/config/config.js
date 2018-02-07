@@ -1,8 +1,8 @@
 // default config
 module.exports = {
   default_module: 'api',
-  errnoField: 'code', // errno field
-  errmsgField: 'msg', // errmsg field
+  // errnoField: 'code', // errno field
+  // errmsgField: 'msg', // errmsg field
   weixin: {
     appid: '', // 小程序 appid
     secret: '', // 小程序密钥
