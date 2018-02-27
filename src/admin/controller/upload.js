@@ -1,6 +1,7 @@
 const Base = require('./base.js');
 const gm = require('gm').subClass({imageMagick: true});
 const fs = require('fs');
+const qiniu = require('../utils/qiniu');
 
 module.exports = class extends Base {
   async brandPicAction() {
@@ -14,10 +15,27 @@ module.exports = class extends Base {
     const os = fs.createWriteStream(think.ROOT_PATH + '/www' + filename);
     is.pipe(os);
 
-    return that.success({
-      name: 'brand_pic',
-      fileUrl: 'http://127.0.0.1:8360' + filename
+
+    //七牛上传
+    const filekey = think.uuid(32) + '.jpg';
+    const filepath = brandFile.path;
+    //const result = await qiniu(filekey,filepath);
+    await qiniu(filekey, filepath).then(function (result) {
+      return that.success({
+        name: 'brand_pic',
+        fileUrl: result.url
+      });
+    }, function (err) {
+      return that.fail('图片上传失败');
     });
+
+
+
+
+    // return that.success({
+    //   name: 'brand_pic',
+    //   fileUrl: 'http://127.0.0.1:8360' + filename
+    // });
     // gm(brandFile.path)
     //   .resize(750, 420, '!')
     //   .write(think.RESOURCE_PATH + filename, function (err) {
