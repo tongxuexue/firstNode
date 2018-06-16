@@ -1,36 +1,46 @@
 {
-  "name": "FirstKoa",
-  "version": "0.1.0",
-  "private": true,
+  "name": "nideshop",
+  "description": "nideshop - open source mini program shop",
+  "version": "1.0.0",
   "scripts": {
-    "start": "cross-env NODE_ENV=production node bin/run ",
-    "dev": "cross-env NODE_ENV=development ./node_modules/.bin/nodemon bin/run ",
-    "prd": "pm2 start bin/www",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node development.js",
+    "compile": "babel --no-babelrc src/ --presets think-node --out-dir app/",
+    "lint": "eslint src/",
+    "lint-fix": "eslint --fix src/"
   },
   "dependencies": {
-    "debug": "^2.6.3",
-    "koa": "^2.3.0",
-    "koa-bodyparser": "^4.2.0",
-    "koa-convert": "^1.2.0",
-    "koa-json": "^2.0.2",
-    "koa-logger": "^2.0.1",
-    "koa-onerror": "^1.2.1",
-    "koa-router": "^7.2.1",
-    "koa-static": "^4.0.0",
-    "koa-views": "^5.2.1",
-    "pug": "^2.0.0-rc.1",
+    "gm": "^1.23.0",
+    "jsonwebtoken": "^8.0.0",
+    "kcors": "^2.2.1",
+    "lodash": "^4.17.4",
     "md5": "^2.2.1",
     "moment": "^2.18.1",
-    "koa-static-cache": "^5.1.1",
-    "koa-mysql-session": "^0.0.2",
-    "koa-session-minimal": "^3.0.4",
-    "mysql": "^2.13.0",
-    "runkoa": "^1.3.1",
-    "cross-env": "^5.1.1",
-    "tracer": "latest"
+    "qiniu": "^7.1.2",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.1",
+    "think-cache": "^1.0.0",
+    "think-cache-file": "^1.0.8",
+    "think-logger3": "^1.0.0",
+    "think-model": "^1.0.0",
+    "think-model-mysql": "^1.0.0",
+    "thinkjs": "^3.0.0",
+    "weixinpay": "^1.0.12",
+    "xml2js": "^0.4.19"
   },
   "devDependencies": {
-    "nodemon": "^1.8.1"
-  }
+    "babel-cli": "^6.24.1",
+    "babel-preset-think-node": "^1.0.0",
+    "node-notifier": "^5.0.2",
+    "think-watcher": "^3.0.0",
+    "think-inspect": "0.0.2",
+    "think-babel": "^1.0.3",
+    "eslint": "^4.2.0",
+    "eslint-config-think": "^1.0.0"
+  },
+  "repository": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "readmeFilename": "README.md"
 }
